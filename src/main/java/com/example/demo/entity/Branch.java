@@ -16,7 +16,7 @@ import jakarta.persistence.OneToOne;
 public class Branch {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	public	int id;
 	public String name;
 	public	String city;
@@ -28,7 +28,12 @@ public class Branch {
 	@OneToMany( mappedBy = "branch", cascade = CascadeType.ALL,fetch = FetchType.EAGER , orphanRemoval = true)
 	public List<Poter> poters;
 	
+	@OneToMany(mappedBy = "endBranch", cascade = CascadeType.ALL,fetch = FetchType.EAGER , orphanRemoval = true)
+	public List<Package> packE;
 	
+	@OneToMany(mappedBy = "startBranch", cascade = CascadeType.ALL,fetch = FetchType.EAGER , orphanRemoval = true)
+	public List<Package> packS;
+		
 	@OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER , orphanRemoval = false )
 	public BranchAddress branchAddress;
 	

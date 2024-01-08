@@ -1,0 +1,56 @@
+package com.example.demo.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.dto.CustomerDto;
+import com.example.demo.dto.PackageDto;
+import com.example.demo.service.PackageService;
+
+@RestController
+@RequestMapping("/package")
+
+public class PackageController {
+	
+	@Autowired
+	PackageService packaeService;
+	
+	@PostMapping
+	public ResponseEntity <PackageDto> savePackage(@RequestBody PackageDto packageDto){
+		
+	  PackageDto response =packaeService.savePackage(packageDto);
+		
+		return new ResponseEntity<>(response,HttpStatus.OK);
+		
+	}
+	
+	@GetMapping("{id}")
+	public ResponseEntity<PackageDto> getPackage(@PathVariable int id){
+
+		PackageDto response =packaeService.getPackage(id);
+		return new ResponseEntity<>(response,HttpStatus.OK);
+		
+		
+	}
+	
+	@PutMapping("{id}")
+	public ResponseEntity<PackageDto> updatePackage(@PathVariable int id, @RequestBody PackageDto packageDto){
+		
+		PackageDto response = packaeService.updatePackage(id,packageDto);
+		return new ResponseEntity<PackageDto>(response, HttpStatus.OK);
+	}
+	
+	
+	
+	
+
+}

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -12,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Poter {
@@ -24,12 +27,14 @@ public class Poter {
 	public String liveLocation;
 	public String active;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinColumn( nullable = false)
-	public Branch branch;
+	public Branch branch;	
 	
-	@ManyToMany(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinTable()
-	public Set<Vehicle> vehicles;
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@JoinColumn()
+	public Vehicle vehicles;
 
+	@OneToMany(mappedBy = "poter", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	public Set <Package> packages;
 }
