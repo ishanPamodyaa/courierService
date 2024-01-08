@@ -14,7 +14,9 @@ public class VehicleService {
 	@Autowired
 	VehicleRepository vehicleRepository;
 	
-	public void addVehicle(VehicleDto vehicleDto) {
+	public void saveVehicle(VehicleDto vehicleDto) {
+		
+		
 		Vehicle vehicleObj = new Vehicle();
 		
 		vehicleObj.type  =vehicleDto.type;

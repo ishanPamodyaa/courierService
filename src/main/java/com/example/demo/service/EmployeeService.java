@@ -26,25 +26,9 @@ public class EmployeeService {
 	@Autowired
 	BranchRepository branchRepository;
 	
-	public void saveEmployee(EmployeeDto employeeDto) {
-		
-		Employee emp =new Employee();
-
-		emp.role=employeeDto.role;
-		emp.active=employeeDto.active;
-		emp.contactNo=employeeDto.contactNo;
-		emp.liveLocation=employeeDto.liveLocation;
-		emp.nic=employeeDto.nic;
-		
-				
-		employeeRepository.save(emp);
-	}
-	
-	
-	public EmployeeDto addEmployeeToBranch(int id ,EmployeeDto employeeDto ){
-		
-		Optional<Branch> branchID =branchRepository.findById(id);
-		
+	public EmployeeDto saveEmployee(EmployeeDto employeeDto) {
+		//int id =employeeDto.branch_id;
+		Optional<Branch> branchID =branchRepository.findById(employeeDto.branchDto.id);
 		if (branchID.isPresent()==false) {
 			return null;
 		}
@@ -60,9 +44,36 @@ public class EmployeeService {
 			emp.liveLocation=employeeDto.liveLocation;
 			emp.nic=employeeDto.nic;
 			emp.branch=bID;
+		 
 			
-			employeeRepository.save(emp);}
+			Employee empObj =employeeRepository.save(emp);
+			employeeDto.id=empObj.id;
+			return employeeDto;	
+		}
 		else {return null;}
+		
+	}
+		
+
+	
+	public EmployeeDto updateEmployee(int id ,EmployeeDto employeeDto ){
+		
+		Optional<Employee> employeeID =employeeRepository.findById(id);
+		
+		if (employeeID.isPresent()==false) {
+			return null;
+		}
+		Employee bID=employeeID.get();
+		
+			bID.role=employeeDto.role;
+			bID.active=employeeDto.active;
+			bID.contactNo=employeeDto.contactNo;
+			bID.liveLocation=employeeDto.liveLocation;
+			bID.nic=employeeDto.nic;
+		
+			
+		Employee empObj = employeeRepository.save(bID);
+		employeeDto.id=empObj.id;
 		return employeeDto ;
 	}
 		

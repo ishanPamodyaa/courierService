@@ -15,7 +15,8 @@ public class EmployeeDto {
 		public int nic;
 		public String liveLocation;
 		public String active;
-		public Set <BranchDto> branch;
+		public BranchDto branchDto;
+	//	public int branch_id;
 	
 		public static EmployeeDto fromEntity(Employee entity) {
 			
@@ -32,10 +33,8 @@ public class EmployeeDto {
 			empDto.nic=entity.nic;
 			empDto.role=entity.role;
 			
-			
-		
-			Set<BranchDto> branchF = new HashSet<>();
 			if(entity.branch != null) {
+				
 		
 				Branch branch = entity.branch;
 				
@@ -46,16 +45,11 @@ public class EmployeeDto {
 				bDto.contactNo=branch.contactNo;
 				bDto.name=branch.name;
 				bDto.id=branch.id;
-				
-			
-			  branchF.add(bDto);
-		
-			}
-			
-			empDto.branch=branchF;
-			return empDto;
-			
-		}
+							
+				empDto.branchDto=bDto;
+			}			
+			return empDto;			
+		 }
 		
 	
 	

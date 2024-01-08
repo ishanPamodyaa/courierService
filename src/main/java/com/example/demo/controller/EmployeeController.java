@@ -25,8 +25,8 @@ public class EmployeeController {
 	EmployeeService employeeService;
 	@PostMapping
 	public ResponseEntity <EmployeeDto> createEmployee(@RequestBody EmployeeDto employeeDto){		
-		employeeService.saveEmployee(employeeDto);
-		return new ResponseEntity<>(employeeDto, HttpStatus.OK);	
+		EmployeeDto response=employeeService.saveEmployee(employeeDto);
+		return new ResponseEntity<>(response, HttpStatus.OK);	
 	}
 	@GetMapping("{id}")
 	public ResponseEntity<EmployeeDto> grtEmployee(@PathVariable int id){
@@ -37,8 +37,8 @@ public class EmployeeController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity <EmployeeDto> addEmployee(@PathVariable int id,@RequestBody EmployeeDto employeeDto){					
-		EmployeeDto response =employeeService.addEmployeeToBranch(id,employeeDto);	
+	public ResponseEntity <EmployeeDto> upateEmployee(@PathVariable int id,@RequestBody EmployeeDto employeeDto){					
+		EmployeeDto response =employeeService.updateEmployee(id,employeeDto);	
 		return new ResponseEntity<>(response, HttpStatus.OK);		
 	}
 	
