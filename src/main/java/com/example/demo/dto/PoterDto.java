@@ -5,6 +5,8 @@ import java.util.Set;
 import com.example.demo.entity.Vehicle;
 
 public class PoterDto {
+	
+	
 	public int id;
 	
 	public String name;
@@ -14,5 +16,5 @@ public class PoterDto {
 	public String active;
     public Vehicle vehicle;
     public BranchDto branch;
-    public int branch_id;
+   // public int branch_id;
 }

@@ -19,17 +19,12 @@ public class PackageDto {
 	public String history;
 	
 	
-	 public Poter poter;
-	 public Cstomer sender;
-	 public Cstomer receiver;
-	 public Branch endBranch;
-	 public Branch startBranch;
-	 public PackageStatus packageStatus;
-	 public PackageHistory packagehistory;
+	 public PoterDto poterDto;
+	 public CustomerDto senderDto;
+	 public CustomerDto receiverDto;
+	 public BranchDto endBranchDto;
+	 public BranchDto startBranchDto;
+	 public PackageStatusDto packageStatusDto;
+	 public PackageHistoryDto packagehistoryDto;
 	 
-	 
-	 
-	
-	//public Package pack;
-
 }
