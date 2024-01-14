@@ -48,7 +48,7 @@ public class Package {
    public Branch startBranch;
    
    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-   @JoinColumn(nullable = true)
+   @JoinColumn(nullable = true )
    public PackageStatus packageStatus;
 
    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)

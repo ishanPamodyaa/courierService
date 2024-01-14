@@ -122,23 +122,29 @@ public class PackageService {
 		
 		Optional<Poter> poterEntity =poterRepository.findById(packageDto.poterDto.id);
 		if(poterEntity.isPresent()==false) {return null; }
+		
 		Optional<Cstomer> customerReceiverEntity =customerRepository.findById(packageDto.receiverDto.id);
 		if(customerReceiverEntity.isPresent()==false) {return null; }
+		
 		Optional<Cstomer> customerSenderEntity =customerRepository.findById(packageDto.senderDto.id);
 		if(customerSenderEntity.isPresent()==false) {return null; }
+		
 		Optional<Branch> branchStaterEntity =branchRepository.findById(packageDto.startBranchDto.id);
 		if(branchStaterEntity.isPresent()==false) {return null; }
+		
 		Optional<Branch> branchEndEntity =branchRepository.findById(packageDto.endBranchDto.id);
-		if(branchEndEntity.isPresent()==false) {return null; }
+		//if(branchEndEntity.isPresent()==false) {return null; }
+		
 		Optional<PackageHistory> packagehistoryEntity =packageHistoryRepository.findById(packageDto.packagehistoryDto.id);
-		if(packagehistoryEntity.isPresent()==false) {return null; }
+		
+		
 		Optional<PackageStatus> packageStatusEntity =packageStatusRepository.findById(packageDto.packageStatusDto.id);
-		if(packageStatusEntity.isPresent()==false) {return null; }
+	//	if(packageStatusEntity.isPresent()==false) {return null; }
 		
 		packageEntity.date=packageDto.date;
 		packageEntity.fee= packageDto.fee;
 		packageEntity.weight=packageDto.weight;
-		packageEntity.transpoter=packageDto.transpoter;
+		//packageEntity.transpoter=packageDto.transpoter;
 		packageEntity.startBranchHandler=packageDto.startBranchHandler;
 		packageEntity.endchBranchHandler=packageDto.endchBranchHandler;
 		packageEntity.addressToSend=packageDto.addressToSend;

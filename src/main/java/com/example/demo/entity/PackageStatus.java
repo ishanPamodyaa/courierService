@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 import java.util.Set;
 
+import com.example.demo.common.PackageStatusEnum;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -13,10 +15,10 @@ import jakarta.persistence.OneToMany;
 public class PackageStatus {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO  )
+	//@GeneratedValue(strategy = GenerationType.AUTO  )
 	public int id;
 	public String discription;
-	
+	public PackageStatusEnum type;
 	@OneToMany(mappedBy ="packageStatus",cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
 	public Set <Package> packStatus;
 	
