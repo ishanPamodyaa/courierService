@@ -5,7 +5,7 @@ import java.util.Set;
 import com.example.demo.entity.Address;
 
 public class CustomerDto {
-	public int id;
+	public Integer id;
 	public String firstName;
 	public String lastName;
 	public String contactNo;

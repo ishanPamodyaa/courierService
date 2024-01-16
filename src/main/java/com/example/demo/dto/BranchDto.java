@@ -6,7 +6,7 @@ import com.example.demo.entity.Branch;
 import com.example.demo.entity.BranchAddress;
 
 public class BranchDto {
-	public	int id;
+	public	Integer id;
 	public String name;
 	public	String city;
 	public	int contactNo;
