@@ -43,24 +43,26 @@ public class PackageService {
 	@Autowired
 	PackageStatusRepository packageStatusRepository; 
 	
-	
-	
-	public PackageDto savePackage(PackageDto packageDto) {
-		
-		//Package pack = new Package(); 
+	public Package commonSaveOrUpdate(PackageDto packageDto) {
 		Package pack =new Package();
 		pack.date=packageDto.date;
 		pack.weight=packageDto.weight;
 	    pack.addressToSend=packageDto.addressToSend;
 		pack.fee=packageDto.fee;
+        return(pack);
 		
 		
-		Package packL= packageRepository.save(pack);
+	}
+	
+	
+	
+	public PackageDto savePackage(PackageDto packageDto) {
 		
-		packageDto.id=packL.id;
+		Package packL = packageRepository.save(commonSaveOrUpdate(packageDto));
 		
-		return packageDto;
-		
+	    packageDto.id = packL.id;
+	    
+	    return packageDto;
 	}
 	
 	
@@ -120,34 +122,34 @@ public class PackageService {
 		
 		Package packageEntity = packageId.get();
 		
-		Optional<Poter> poterEntity =poterRepository.findById(packageDto.poterDto.id);
-		if(poterEntity.isPresent()==false) {return null; }
-		
-		Optional<Cstomer> customerReceiverEntity =customerRepository.findById(packageDto.receiverDto.id);
-		if(customerReceiverEntity.isPresent()==false) {return null; }
-		
-		Optional<Cstomer> customerSenderEntity =customerRepository.findById(packageDto.senderDto.id);
-		if(customerSenderEntity.isPresent()==false) {return null; }
-		
-		Optional<Branch> branchStaterEntity =branchRepository.findById(packageDto.startBranchDto.id);
-		if(branchStaterEntity.isPresent()==false) {return null; }
-		
-		Optional<Branch> branchEndEntity =branchRepository.findById(packageDto.endBranchDto.id);
-		//if(branchEndEntity.isPresent()==false) {return null; }
-		
-		Optional<PackageHistory> packagehistoryEntity =packageHistoryRepository.findById(packageDto.packagehistoryDto.id);
+		Optional<Poter> poterEntity =(packageDto.poterDto != null && packageDto.poterDto.id != null) ? poterRepository.findById(packageDto.poterDto.id): Optional.empty();
 		
 		
-		Optional<PackageStatus> packageStatusEntity =packageStatusRepository.findById(packageDto.packageStatusDto.id);
-	//	if(packageStatusEntity.isPresent()==false) {return null; }
+		Optional<Cstomer> customerReceiverEntity =(packageDto.receiverDto != null && packageDto.receiverDto.id != null) ? customerRepository.findById(packageDto.receiverDto.id): Optional.empty();
 		
-		packageEntity.date=packageDto.date;
-		packageEntity.fee= packageDto.fee;
-		packageEntity.weight=packageDto.weight;
-		//packageEntity.transpoter=packageDto.transpoter;
+		
+		Optional<Cstomer> customerSenderEntity =(packageDto.senderDto != null && packageDto.senderDto.id != null) ? customerRepository.findById(packageDto.senderDto.id): Optional.empty();
+		
+		
+		Optional<Branch> branchStaterEntity =(packageDto.startBranchDto != null && packageDto.startBranchDto.id != null) ? branchRepository.findById(packageDto.startBranchDto.id): Optional.empty();
+		
+		
+		Optional<Branch> branchEndEntity =(packageDto.endBranchDto != null && packageDto.endBranchDto.id != null) ? branchRepository.findById(packageDto.endBranchDto.id): Optional.empty();
+		
+		
+		Optional<PackageHistory> packagehistoryEntity =(packageDto.packagehistoryDto != null && packageDto.packagehistoryDto.id != null) ? packageHistoryRepository.findById(packageDto.packagehistoryDto.id): Optional.empty();
+		
+		
+		Optional<PackageStatus> packageStatusEntity =(packageDto.packageStatusDto != null && packageDto.packageStatusDto.id != null) ?packageStatusRepository.findById(packageDto.packageStatusDto.id): Optional.empty();
+			
+//		packageEntity.date=packageDto.date;
+//		packageEntity.fee= packageDto.fee;
+//		packageEntity.weight=packageDto.weight;
+//		packageEntity.addressToSend=packageDto.addressToSend;
+		
+		
 		packageEntity.startBranchHandler=packageDto.startBranchHandler;
 		packageEntity.endchBranchHandler=packageDto.endchBranchHandler;
-		packageEntity.addressToSend=packageDto.addressToSend;
 		packageEntity.history=packageDto.history;
 		
 		packageEntity.poter=poterEntity.get();
@@ -159,8 +161,7 @@ public class PackageService {
 		packageEntity.packagehistory=packagehistoryEntity.get();
 		
 		
-		//packageDto.id=pack.id;
-		
+		packageEntity=commonSaveOrUpdate(packageDto);
 		
 		Package packageR = packageRepository.save(packageEntity);
 		packageDto.id=packageR.id;

@@ -7,7 +7,7 @@ import com.example.demo.entity.Vehicle;
 public class PoterDto {
 	
 	
-	public int id;
+	public Integer id;
 	
 	public String name;
 	public String contactNo;
@@ -16,5 +16,5 @@ public class PoterDto {
 	public String active;
     public Vehicle vehicle;
     public BranchDto branch;
-   // public int branch_id;
+   //public int branch_id;
 }

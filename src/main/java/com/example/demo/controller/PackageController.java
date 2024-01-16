@@ -60,7 +60,7 @@ public class PackageController {
 		boolean done=packaeService.deletePackage(id);
 		
 		if(done==true) {
-			return ResponseEntity.ok("Data Delete Successful = ID " + id );
+			return ResponseEntity.ok("Data Delete Successful = ID "+id);
 		}else
 			return ResponseEntity.status(404).body("Data Delete Not Successfuul(or Not Found) = ID " + id);
 	
