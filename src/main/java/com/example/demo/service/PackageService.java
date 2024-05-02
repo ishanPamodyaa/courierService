@@ -1,8 +1,13 @@
 package com.example.demo.service;
 
-import java.util.Optional;
 
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.CustomerDto;
@@ -170,8 +175,27 @@ public class PackageService {
 		 return false;		
 	}
 	
+	public List	<Package> findPageAndSortPackage(int page,int size){
 		
+		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC,"date"));
+		Page <Package> pagedResponse = packageRepository.findAll(pageable);
 		
+		System.out.println("Total Number Of page :: " + pagedResponse.getTotalPages());
+		List<Package> allPackages= pagedResponse.getContent();
+		
+		return allPackages;
+	}
+	
+	public List	<Package> findPagedPackage(int page,int size){
+		
+		Pageable pageable = PageRequest.of(page, size);
+		Page <Package> pagedResponse = packageRepository.findAll(pageable);
+		
+		System.out.println("Total Number Of page :: " + pagedResponse.getTotalPages());
+		List<Package> allPackages= pagedResponse.getContent();
+		
+		return allPackages;
+	}
 		
 	}
 
