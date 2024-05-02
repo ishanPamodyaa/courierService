@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.CustomerDto;
 import com.example.demo.dto.PackageDto;
+import com.example.demo.entity.Package;
 import com.example.demo.service.PackageService;
 
 @RestController
@@ -65,6 +68,22 @@ public class PackageController {
 			return ResponseEntity.status(404).body("Data Delete Not Successfuul(or Not Found) = ID " + id);
 	
 		
+	}
+	@GetMapping("{page}/{size}")
+	public ResponseEntity<Object> findAllPackage(@PathVariable int page ,@PathVariable int size){
+		
+		List<Package> savedPackage= packaeService.findPageAndSortPackage(page, size);
+		
+	
+		return ResponseEntity.status(HttpStatus.OK).body(savedPackage);
+	}
+	@GetMapping("sort/{page}/{size}")
+   public ResponseEntity<Object> findAllPackageAndSort(@PathVariable int page ,@PathVariable int size){
+		
+		List<Package> savedPackage= packaeService.findPageAndSortPackage(page, size);
+		
+	
+		return ResponseEntity.status(HttpStatus.OK).body(savedPackage);
 	}
 	
 	
